@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Negociações</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    
+</head>
+<body class="container">
+    
+    <h1 class="text-center">Negociações</h1>
+    
+    <form class="form" onsubmit="negociacaoController.incluir(event)">
+        
+        <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" class="form-control" required autofocus/>        
+        </div>    
+        
+        <div class="form-group">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" min="1" step="1" id="quantidade" name="quantidade" class="form-control" value="1" required/>
+        </div>
+        
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <input id="valor" type="number" class="form-control" name="valor"  min="0.01" step="0.01" value="0.0" required />
+        </div>
+        
+        <button class="btn btn-primary" type="submit" id="btnIncluir">Incluir</button>
+    </form>
+    
+    <div class="text-center">
+        <button class="btn btn-primary text-center" type="button">
+            Importar Negociações
+        </button>
+        <button class="btn btn-primary text-center" type="button">
+            Apagar
+        </button>
+    </div> 
+    <br>
+    <br>
+    
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>DATA</th>
+                <th>QUANTIDADE</th>
+                <th>VALOR</th>
+                <th>VOLUME</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        </tbody>
+        
+        <tfoot>
+        </tfoot>
+    </table>
+    <script src="js/app/models/Negociacao.js"></script>
+    <script src="js/app/controllers/NegociacaoController.js"></script>
+    <script src="js/app/helpers/DateHelper.js"></script>
+    <script>
+        let negociacaoController = new NegociacaoController();
+
+        /*let numeros = [3,2,11,20,8,7];
+
+        function novaLista(lista){
+            let novaLista = [];
+            for(let i = 0; i < lista.length; i++){
+                if((lista[i] % 2)){
+                    novaLista.push(lista[i] * 2); 
+                }
+                else {
+                    novaLista.push(lista[i]); 
+                }
+            }
+            return novaLista;
+        }
+
+        let newLista = novaLista(numeros);
+        console.log(newLista); //6,2,22,20,8,14
+        console.log(numeros); //3,2,11,20,8,7
+
+        let somaDeNumeros = [10,30];
+
+        function somaNumeros(numero1,numero2){
+            return numero1 + numero2;
+        }
+
+        console.log(somaNumeros(somaDeNumeros[0],somaDeNumeros[1]));
+        console.log(somaNumeros(...somaDeNumeros));*/
+
+    </script>
+</body>
+</html>
