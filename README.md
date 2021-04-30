@@ -11,7 +11,7 @@
 
 # Anotações
 
- 1. Criando uma classe em javascript:</br>
+1. Criando uma classe em javascript:</br>
 ```js
 class Negociacao {
 	constructor(){
