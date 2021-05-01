@@ -332,3 +332,47 @@ let numerosDobrados = numeros.map((item,indice) => indice == 1 ? item * 2 : item
 																					//com as chaves {}
 console.log(numerosDobrados);
 console.log(numeros);
+```
+
+16. O diretório "helpers" do projeto serve como um espaço para criarmos classes ajudantes (helpers) para facilitar certas coisas como a construção de um objeto do tipo Date</br>Podemos assim criar uma classe que terá a responsabilidade transformar uma string em um objeto Date e de um objeto date para String</br>
+
+Ex:
+```js
+class DateHelper {
+
+	//O construtor padrão da classe DateHelper retornará um excessão, caso alguém tente instaciar a classe.
+	constructor(){
+		throw new Error("DateHelper não pode ser instanciada, pois é uma classe estática");
+	}
+	
+	//Este método estático recebe uma string
+	static textoParaData(texto){ 
+		if(!/\d{4}-\d{2}-\d{2}/.test(texto)){ //A Expressão regular vai testar minha string
+			throw new Error("Deve estar no formato aaaa-mm-dd");//Caso o resultado for falso, vai entrar e estourar um erro no console
+		}
+		else { //Caso a string esteja formatada da maneira desejada...
+			return new Date(
+				...texto.split('-').map((item,indice) => item - indice % 2) //Cria-se um objeto do tipo Date.
+			);
+		}
+	}
+	
+	//Este método estático recebe um objeto do tipo Data.
+	static dataParaTexto(data){
+		return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`; //Concatena métodos da data para criar uma data no formato dd/mm/aaaa
+	}
+}
+```
+Obs: Métodos estáticos são invocados diretamente. Ou seja, não é preciso criar-se um objeto da classe, para acessa-los apenas invocamos usando a definição da classe, onde
+estão contidos ex:  `DateHelper.textoParaData()`, `dataParaTexto(data)`
+
+17. Template Strings é uma maneira mais elegante de concatenar String</br>
+Ex:
+```js
+let nome = {
+	primeiroNome: "Maria",
+	sobrenome: "Candida"
+}
+console.log("Meu nome completo é: " + nome.primeiroNome + " " + nome.sobrenome); //Sem Template String
+console.log(`Meu nome completo é: ${nome.primeiroNome} ${nome.sobrenome}`); //Com Template String. O mesmo nos possibilita também saltar linhas sem utlizar o operador de +
+```
