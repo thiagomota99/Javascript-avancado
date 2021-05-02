@@ -376,3 +376,14 @@ let nome = {
 console.log("Meu nome completo é: " + nome.primeiroNome + " " + nome.sobrenome); //Sem Template String
 console.log(`Meu nome completo é: ${nome.primeiroNome} ${nome.sobrenome}`); //Com Template String. O mesmo nos possibilita também saltar linhas sem utlizar o operador de +
 ```
+
+18. O método `concat()` é utilizado para "clonar" um array já existente. O novo array irá possuir todas as posições e valores do array recebido.</br>
+Ex:
+```js
+let arrayUm = [1,2,3,4];
+
+let arrayDois = [].concat(arrayUm);
+
+console.log(arrayUm.push(5));
+console.log(arrayDois.push(6));
+```
