@@ -9,7 +9,7 @@ class ListaNegociacoes {
 	}
 
 	get negociacoes(){
-
-		return [].concat(this._negociacoes);
+		let copiaNegociacao = [].concat(this._negociacoes);
+		return copiaNegociacao;
 	}
 }
