@@ -10,14 +10,10 @@ class NegociacaoController{
 	}
 
 	incluir(event){
-		event.preventDefault();
-		
-		this._listaNegociacoes.adiciona(this._criaNegociacao());
-		this._listaNegociacoes.negociacoes.push(this._criaNegociacao());
-		this._limparCamposDoForm();
 
-		
-		console.log(this._listaNegociacoes.negociacoes);			
+		event.preventDefault();
+		this._listaNegociacoes.adiciona(this._criaNegociacao());
+		this._limparCamposDoForm();			
 	}
 
 	_criaNegociacao(){
@@ -29,9 +25,9 @@ class NegociacaoController{
 	}
 
 	_limparCamposDoForm(){
-		this._inputQuantidade.value = "";
-		this._inputValor.value = "";
-		this._inputData.value = "";
+		this._inputQuantidade.value = '';
+		this._inputValor.value = '';
+		this._inputData.value = '';
 		this._inputData.focus();		
 	}
 }
