@@ -319,3 +319,78 @@ let numerosDobrados = numeros.map((item,indice) => indice == 1 ? item * 2 : item
 																					//com as chaves {}
 console.log(numerosDobrados);
 console.log(numeros);
+```
+
+16. Criando uma View para exibir a apresentação dos dados implementados no modelo.
+
+```js
+class NegociacoesView{
+    constructor(elemento){
+        this._elemento = elemento; //Recebe o elemento onde será carregada a view
+    }
+
+    //Conteúdo html a ser exibido
+    _template(model){
+        return `
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>DATA</th>
+                    <th>QUANTIDADE</th>
+                    <th>VALOR</th>
+                    <th>VOLUME</th>
+                </tr>
+            </thead>
+
+        <tbody>
+            ${model.negociacoes.map(n => //Cria um novo array de string, onde cada string é um array. Depois realizada a junção com a função desse mesmo array em
+             							 //uma string só.
+                `
+                    <tr>
+                        <td>${DateHelper.dataParaTexto(n.data)}</td>
+                        <td>${n.quantidade}</td>
+                        <td>${n.valor}</td>
+                        <td>${n.volume}</td>
+                    </tr>
+                `
+            ).join('')}
+        </tbody>
+        
+        <tfoot>
+            <td colspan="3"></td>
+            <td>${
+                    (function(){ //Está função será invocada automaticamente quando chegar nesse ponto do código. IIFE
+                        let total = 0;
+                        model.negociacoes.forEach(negociacao => total = total + negociacao.volume);
+                        return total;
+                    })()
+                }
+            </td>
+        </tfoot>
+    </table>
+    `
+    }
+
+    //Atualizar view conforme atulizações do modelo.
+    update(model){
+        this._elemento.innerHTML = this._template(model); //Incrementar o innerHTML com
+    }
+} 
+```
+
+17. A função `reduce` pode ser utilizada sobre arrays. Onde tem o objetivo de processar um array e devolver um único resultado.
+```js
+        
+`
+<tfoot>
+    <td colspan="3"></td>
+    <td>${model.negociacoes.reduce(function(total,negociacao){ //A variável total é a que vai armazenar o valor a ser devolvido pela função.
+    														   //A variável negociacao é cada item do array.
+    														   //O segundo parâmetro da função reduce é o valor inicial da variável a ser devolvida
+    	return total + n.volume 
+    }),0.0}</td>											  
+ </tfoot>
+`
+
+```
+
