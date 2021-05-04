@@ -386,4 +386,144 @@ let arrayDois = [].concat(arrayUm);
 
 console.log(arrayUm.push(5));
 console.log(arrayDois.push(6));
+
+```
+
+19. Criando uma View para exibir a apresentação dos dados implementados no modelo.
+
+```js
+class NegociacoesView{
+    constructor(elemento){
+        this._elemento = elemento; //Recebe o elemento onde será carregada a view
+    }
+
+    //Conteúdo html a ser exibido
+    _template(model){
+        return `
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>DATA</th>
+                    <th>QUANTIDADE</th>
+                    <th>VALOR</th>
+                    <th>VOLUME</th>
+                </tr>
+            </thead>
+
+        <tbody>
+            ${model.negociacoes.map(n => //Cria um novo array de string, onde cada string é um array. Depois realizada a junção com a função desse mesmo array em
+             							 //uma string só.
+                `
+                    <tr>
+                        <td>${DateHelper.dataParaTexto(n.data)}</td>
+                        <td>${n.quantidade}</td>
+                        <td>${n.valor}</td>
+                        <td>${n.volume}</td>
+                    </tr>
+                `
+            ).join('')}
+        </tbody>
+        
+        <tfoot>
+            <td colspan="3"></td>
+            <td>${
+                    (function(){ //Está função será invocada automaticamente quando chegar nesse ponto do código. IIFE
+                        let total = 0;
+                        model.negociacoes.forEach(negociacao => total = total + negociacao.volume);
+                        return total;
+                    })()
+                }
+            </td>
+        </tfoot>
+    </table>
+    `
+    }
+
+    //Atualizar view conforme atulizações do modelo.
+    update(model){
+        this._elemento.innerHTML = this._template(model); //Incrementar o innerHTML com
+    }
+} 
+```
+
+20. A função `reduce` pode ser utilizada sobre arrays. Onde tem o objetivo de processar um array e devolver um único resultado.
+```js
+        
+`
+<tfoot>
+    <td colspan="3"></td>
+    <td>${model.negociacoes.reduce(function(total,negociacao){ //A variável total é a que vai armazenar o valor a ser devolvido pela função.
+    														   //A variável negociacao é cada item do array.
+    														   //O segundo parâmetro da função reduce é o valor inicial da variável a ser devolvida
+    	return total + n.volume 
+    }),0.0}</td>											  
+ </tfoot>
+`
+
+```
+
+21. É possível da mesma forma de criar um get para classes em javascript, podemos também criar sets. Da seguinte forma</br>
+Ex:
+```js
+class Mensagem {
+	constructor(texto="Valo padrão do texto"){ //passando um valor padrão para o parâmetro do construtor da classe, caso o usuário não passe nada
+		this._texto = texto; 
+	}
+
+	get texto(){
+		return this._texto;
+	}
+
+	set texto(texto){ //Método set do atributo texto. 
+		return this._texto;
+	}
+}
+
+let mensagem = new Mensagem();
+console.log(mensagem.texto);
+mensagem.texto = "Testando método set";
+console.log(mensagem.texto);
+```
+
+22. É possível utilizar o pilar de herança em javascript. Com a seguinte sintaxe:
+```js
+class Mensagem extends View{ //A palavra reservada extends serve para herdar uma classe.
+	constructor(texto="Valo padrão do texto"){ //passando um valor padrão para o parâmetro do construtor da classe, caso o usuário não passe nada
+		this._texto = texto; 
+	}
+
+	get texto(){
+		return this._texto;
+	}
+
+	set texto(texto){ //Método set do atributo texto. 
+		return this._texto;
+	}
+}
+
+let mensagem = new Mensagem();
+console.log(mensagem.texto);
+mensagem.texto = "Testando método set";
+console.log(mensagem.texto);
+```
+
+23. Utilizando o método no construtor da classe filha `super()` para invocar o método construtor da classe pai.
+
+```js
+class MensagemView extends View {
+	
+	constructor(elemento){
+		super(elemento); //Nesta linha a classe está chamando o construtor da classe pai View passando como parâmetro "elemento".	
+	}
+
+	template(model){
+
+		return model.texto ? `<p class="alert alert-info">${model.texto}</p>` : `<p></p>`;
+	}
+}
+
+let mensagem = new Mensagem();
+console.log(mensagem.texto);
+mensagem.texto = "Testando método set";
+console.log(mensagem.texto);
 ```
