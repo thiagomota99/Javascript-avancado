@@ -394,3 +394,68 @@ class NegociacoesView{
 
 ```
 
+18. É possível da mesma forma de criar um get para classes em javascript, podemos também criar sets. Da seguinte forma</br>
+Ex:
+```js
+class Mensagem {
+	constructor(texto="Valo padrão do texto"){ //passando um valor padrão para o parâmetro do construtor da classe, caso o usuário não passe nada
+		this._texto = texto; 
+	}
+
+	get texto(){
+		return this._texto;
+	}
+
+	set texto(texto){ //Método set do atributo texto. 
+		return this._texto;
+	}
+}
+
+let mensagem = new Mensagem();
+console.log(mensagem.texto);
+mensagem.texto = "Testando método set";
+console.log(mensagem.texto);
+```
+
+19. É possível utilizar o pilar de herança em javascript. Com a seguinte sintaxe:
+```js
+class Mensagem extends View{ //A palavra reservada extends serve para herdar uma classe.
+	constructor(texto="Valo padrão do texto"){ //passando um valor padrão para o parâmetro do construtor da classe, caso o usuário não passe nada
+		this._texto = texto; 
+	}
+
+	get texto(){
+		return this._texto;
+	}
+
+	set texto(texto){ //Método set do atributo texto. 
+		return this._texto;
+	}
+}
+
+let mensagem = new Mensagem();
+console.log(mensagem.texto);
+mensagem.texto = "Testando método set";
+console.log(mensagem.texto);
+```
+
+20. Utilizando o método no construtor da classe filha `super()` para invocar o método construtor da classe pai.
+
+```js
+class MensagemView extends View {
+	
+	constructor(elemento){
+		super(elemento); //Nesta linha a classe está chamando o construtor da classe pai View passando como parâmetro "elemento".	
+	}
+
+	template(model){
+
+		return model.texto ? `<p class="alert alert-info">${model.texto}</p>` : `<p></p>`;
+	}
+}
+
+let mensagem = new Mensagem();
+console.log(mensagem.texto);
+mensagem.texto = "Testando método set";
+console.log(mensagem.texto);
+```
